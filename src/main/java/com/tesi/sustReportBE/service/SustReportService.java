@@ -37,6 +37,6 @@ public class SustReportService {
             ReportEntity result = fileOpt.get();
             return result;
         }
-        throw new RuntimeException("Report not found for year = " + year);
+        return null;
     }
 }
