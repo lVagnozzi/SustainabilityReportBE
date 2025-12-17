@@ -34,7 +34,8 @@ public class SustReportService {
     public ReportEntity getReport(int year){
         Optional<ReportEntity> fileOpt = reportRepository.findByYear(year);
         if (fileOpt.isPresent()){
-            return fileOpt.get();
+            ReportEntity result = fileOpt.get();
+            return result;
         }
         throw new RuntimeException("Report not found for year = " + year);
     }

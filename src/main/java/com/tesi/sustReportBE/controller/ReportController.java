@@ -3,11 +3,9 @@ package com.tesi.sustReportBE.controller;
 import com.tesi.sustReportBE.model.ReportEntity;
 import com.tesi.sustReportBE.repository.ReportRepository;
 import com.tesi.sustReportBE.service.SustReportService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -22,12 +20,13 @@ public class ReportController {
         this.sustReportService = sustReportService;
     }
 
-    @GetMapping("/get")
-    public ResponseEntity<ReportEntity> getSustReport(@RequestParam("year") int year){
-        return ResponseEntity.ok(sustReportService.getReport(year));
+    @GetMapping("/get/{year}")
+    public ResponseEntity<ReportEntity> getSustReport(@PathVariable("year") int year){
+        ReportEntity result = sustReportService.getReport(year);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @GetMapping("/upload")
+    @PostMapping("/upload")
     public ResponseEntity<?> saveSustReport(@RequestParam("file") MultipartFile file, @RequestParam("year") int year)
             throws IOException {
         try {

@@ -29,4 +29,5 @@ public class ReportEntity {
         this.year = year;
         this.fileData = fileData;
     }
+
 }
