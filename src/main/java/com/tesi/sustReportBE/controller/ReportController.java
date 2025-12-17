@@ -30,7 +30,11 @@ public class ReportController {
     @GetMapping("/upload")
     public ResponseEntity<?> saveSustReport(@RequestParam("file") MultipartFile file, @RequestParam("year") int year)
             throws IOException {
-        sustReportService.salva(file,year);
+        try {
+            sustReportService.salva(file,year);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().body("Errore upload");
+        }
         return ResponseEntity.ok("File caricato con successo");
     }
 

@@ -5,9 +5,11 @@ import com.tesi.sustReportBE.repository.ReportRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -23,10 +25,8 @@ public class SustReportService {
 
     @Transactional
     public void salva(MultipartFile file, int year) throws IOException {
-        ReportEntity entity = new ReportEntity();
-        entity.setFilename(file.getOriginalFilename());
-        entity.setYear(year);
-        entity.setFileData(file.getBytes());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        ReportEntity entity = new ReportEntity(fileName,year,file.getBytes());
         reportRepository.save(entity);
     }
 
