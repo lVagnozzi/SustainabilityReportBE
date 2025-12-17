@@ -32,13 +32,10 @@ public class ReportController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Report non trovato per l'anno " + year);
         }
 
-        // Restituisci direttamente i byte con l'header corretto
+        // Restituisco direttamente i byte con l'header corretto
         return ResponseEntity.ok()
-                // Dice al browser: "Questo è un PDF"
                 .contentType(MediaType.APPLICATION_PDF)
-                // Dice al browser: "Scaricalo con questo nome"
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"report-" + year + ".pdf\"")
-                // Inserisce il contenuto binario (NON JSON)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Eni_Sustainability_Report-" + year + ".pdf\"")
                 .body(report.getFileData());
     }
 
