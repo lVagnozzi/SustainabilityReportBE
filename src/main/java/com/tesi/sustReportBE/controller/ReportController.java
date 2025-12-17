@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/reports")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ReportController {
 
     //Dependency Injection per costruttore
