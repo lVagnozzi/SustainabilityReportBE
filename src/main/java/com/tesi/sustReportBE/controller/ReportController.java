@@ -1,5 +1,6 @@
 package com.tesi.sustReportBE.controller;
 
+import com.tesi.sustReportBE.dto.ReportDto;
 import com.tesi.sustReportBE.model.ReportEntity;
 import com.tesi.sustReportBE.repository.ReportRepository;
 import com.tesi.sustReportBE.service.SustReportService;
@@ -11,16 +12,26 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/reports")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ReportController {
 
     //Dependency Injection per costruttore
     private final SustReportService sustReportService;
     public ReportController(SustReportService sustReportService) {
         this.sustReportService = sustReportService;
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<ReportDto>> getAllReportsYears(){
+        List<ReportDto> result = sustReportService.getAllYears();
+        if(result == null){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(result);
+        }
     }
 
     @GetMapping("/get/{year}")

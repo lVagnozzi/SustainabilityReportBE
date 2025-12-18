@@ -1,21 +1,25 @@
 package com.tesi.sustReportBE.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "report")
+@Builder
+@AllArgsConstructor
 public class ReportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String filename;
+    @Column(name = "file_name", nullable = false)
+    private String fileName;
 
-    @Column(nullable = false)
+    @Column(name = "year", nullable = false)
     private int year;
 
     @Lob
@@ -23,11 +27,5 @@ public class ReportEntity {
     private byte[] fileData;
 
     public ReportEntity(){}
-
-    public ReportEntity(String filename, int year, byte[] fileData) {
-        this.filename = filename;
-        this.year = year;
-        this.fileData = fileData;
-    }
 
 }
