@@ -1,6 +1,5 @@
 package com.tesi.sustReportBE.service;
 
-import com.tesi.sustReportBE.dto.ReportDto;
 import com.tesi.sustReportBE.model.ReportEntity;
 import com.tesi.sustReportBE.repository.ReportRepository;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +9,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SustReportService {
@@ -50,12 +51,12 @@ public class SustReportService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReportDto> getAllYears(){
-        Optional<List<ReportDto>> result = reportRepository.findAllSummaries();
-        if (result.isEmpty()){
-            return null;
-        }else{
-            return result.get();
-        }
+    public List<Integer> getAllYears(){
+        return reportRepository.findAll()
+                .stream()
+                .map(ReportEntity::getYear) // Prende solo l'anno
+                .distinct()                 // Rimuove duplicati lato server
+                .sorted(Comparator.reverseOrder()) // Ordina (2023, 2022...)
+                .collect(Collectors.toList());
     }
 }

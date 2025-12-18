@@ -1,6 +1,5 @@
 package com.tesi.sustReportBE.controller;
 
-import com.tesi.sustReportBE.dto.ReportDto;
 import com.tesi.sustReportBE.model.ReportEntity;
 import com.tesi.sustReportBE.repository.ReportRepository;
 import com.tesi.sustReportBE.service.SustReportService;
@@ -12,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/reports")
@@ -25,13 +26,8 @@ public class ReportController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ReportDto>> getAllReportsYears(){
-        List<ReportDto> result = sustReportService.getAllYears();
-        if(result == null){
-            return ResponseEntity.notFound().build();
-        }else{
-            return ResponseEntity.ok(result);
-        }
+    public List<Integer> getAvailableYears() {
+        return sustReportService.getAllYears();
     }
 
     @GetMapping("/get/{year}")
