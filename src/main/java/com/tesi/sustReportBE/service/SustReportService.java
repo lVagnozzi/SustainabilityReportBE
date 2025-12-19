@@ -30,11 +30,10 @@ public class SustReportService {
     public void salva(MultipartFile file, int year) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
-        // Uso il Builder invece del new ReportEntity(...)
         ReportEntity entity = ReportEntity.builder()
                 .fileName(fileName)
                 .year(year)
-                .fileData(file.getBytes()) // o fileData, come l'hai chiamato
+                .fileData(file.getBytes())
                 .build();
 
         reportRepository.save(entity);
@@ -56,7 +55,7 @@ public class SustReportService {
                 .stream()
                 .map(ReportEntity::getYear) // Prende solo l'anno
                 .distinct()                 // Rimuove duplicati lato server
-                .sorted(Comparator.reverseOrder()) // Ordina (2023, 2022...)
+                .sorted(Comparator.reverseOrder()) // Riordina in modo decrescente
                 .collect(Collectors.toList());
     }
 }

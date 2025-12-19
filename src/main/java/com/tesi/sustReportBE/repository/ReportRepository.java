@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface ReportRepository extends JpaRepository<ReportEntity,Long> {
     Optional<ReportEntity> findByYear(int year);
 
-
 }
