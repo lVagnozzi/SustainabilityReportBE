@@ -2,7 +2,6 @@ package com.tesi.sustReportBE.service;
 
 import com.tesi.sustReportBE.model.ReportEntity;
 import com.tesi.sustReportBE.repository.ReportRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
