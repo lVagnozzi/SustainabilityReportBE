@@ -5,7 +5,7 @@ Di seguito, lo script SQL da far girare sul db MySql root@127.0.0.1:3306 (Versio
 
 CREATE TABLE report (
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  file_name VARCHAR(255),
-  year INT,
-  file_data LONGBLOB
+  file_name VARCHAR(255) NOT NULL,
+  year INT NOT NULL,
+  file_data LONGBLOB NOT NULL
 );
