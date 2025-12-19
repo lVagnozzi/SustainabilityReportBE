@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 @Service
 public class SustReportService {
 
-    private static boolean error = false;
-
     //Dependency Injection per costruttore
     private final ReportRepository reportRepository;
     public SustReportService(ReportRepository reportRepository) {
